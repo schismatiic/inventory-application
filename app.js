@@ -10,7 +10,9 @@ app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 
 const indexRouter = require("./routes/indexRouter");
+const categoriesRouter = require("./routes/categoriesRouter");
 
+app.use("/categories", categoriesRouter);
 app.use("/", indexRouter);
 app.use((err, req, res, next) => {
   console.error(err);
