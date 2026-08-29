@@ -30,7 +30,12 @@ const validateMessage = [
     .isInt({ min: 1 })
     .withMessage("Category must be a positive integer."),
 ];
-
+// Get
+const getBook = async (req, res) => {
+  const { id } = req.params;
+  const { name, author, description, pages, category } = await db.getBook(id);
+  res.render("book", { id, name, author, description, pages, category });
+};
 const getBooks = async (req, res) => {
   const books = await db.getAllBooks();
   res.render("index", { books });
@@ -39,6 +44,7 @@ const getCreateBook = async (req, res) => {
   const categories = await db.getAllCategories();
   res.render("create-book", { categories });
 };
+// Create
 const createBook = async (req, res) => {
   const errors = validationResult(req);
   const categories = await db.getAllCategories();
@@ -61,4 +67,10 @@ const createBook = async (req, res) => {
   res.redirect("/");
 };
 
-module.exports = { getBooks, getCreateBook, createBook, validateMessage };
+module.exports = {
+  getBook,
+  getBooks,
+  getCreateBook,
+  createBook,
+  validateMessage,
+};

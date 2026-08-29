@@ -11,7 +11,10 @@ const getAllCategories = async () => {
   return rows;
 };
 const getBook = async (id) => {
-  const { rows } = await pool.query("SELECT * FROM books WHERE id = $1", [id]);
+  const { rows } = await pool.query(
+    "SELECT books.id, books.name, books.author, books.description, books.pages, categories.name AS category FROM books INNER JOIN categories ON books.category_fk = categories.id WHERE books.id = $1",
+    [id],
+  );
   return rows[0];
 };
 const getCategory = async (id) => {
