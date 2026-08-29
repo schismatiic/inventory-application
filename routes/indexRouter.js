@@ -5,15 +5,18 @@ const {
   getBook,
   getBooks,
   getCreateBook,
-  createBook,
-  validateMessage,
+  createBookPost,
+  validateCreateBook,
   getRemoveBook,
+  removeBookPost,
+  validateRemoveBook,
 } = require("../controllers/indexController");
 
 indexRouter.get("/", getBooks);
 indexRouter.get("/book/create", getCreateBook);
-indexRouter.post("/book/create", validateMessage, createBook);
+indexRouter.post("/book/create", validateCreateBook, createBookPost);
 indexRouter.get("/book/:id", getBook);
 indexRouter.get("/book/:id/remove", getRemoveBook);
+indexRouter.post("/book/:id/remove", validateRemoveBook, removeBookPost);
 
 module.exports = indexRouter;
