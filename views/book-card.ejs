@@ -1,21 +1,29 @@
-<li class="border border-white/20 p-4">
-    <h3 class="font-bold">
-        <%= name %>
-    </h3>
-    <p class="text-sm">
-        <span class="font-bold">Author:</span>
-        <%= author %>
-    </p>
-    <p class="text-sm">
-        <span class="font-bold">Description:</span>
-        <%= description %>
-    </p>
-    <p class="text-sm">
-        <span class="font-bold">Number of pages:</span>
-        <%= pages %>
-    </p>
-    <p class="text-sm">
-        <span class="font-bold">Category:</span>
-        <%= category %>
-    </p>
+<li class="flex flex-col gap-2 md:items-center md:flex-row md:justify-between border border-white/20 p-4">
+    <div>
+        <h3 class="font-bold">
+            <%= name %>
+        </h3>
+        <p class="text-sm">
+            <span class="font-bold">Author:</span>
+            <%= author %>
+        </p>
+        <p class="text-sm">
+            <span class="font-bold">Description:</span>
+            <%= description %>
+        </p>
+        <p class="text-sm">
+            <span class="font-bold">Number of pages:</span>
+            <%= pages %>
+        </p>
+        <p class="text-sm">
+            <span class="font-bold">Category:</span>
+            <%= category %>
+        </p>
+    </div>
+    <div class="flex gap-2">
+        <a href="/<%= id %>"
+            class="bg-white text-black px-4 py-1 cursor-pointer hover:bg-white/95 active:scale-95">Open</a>
+        <a href="/<%= id %>/edit"
+            class="border border-white/20 text-white px-4 py-1 cursor-pointer hover:bg-gray-900 active:scale-95">Edit</a>
+    </div>
 </li>

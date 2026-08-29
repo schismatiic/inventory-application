@@ -2,7 +2,7 @@ const pool = require("./pool");
 
 const getAllBooks = async () => {
   const { rows } = await pool.query(
-    "SELECT books.name, books.author, books.description, books.pages, categories.name AS category FROM books INNER JOIN categories ON books.category_fk = categories.id",
+    "SELECT books.id, books.name, books.author, books.description, books.pages, categories.name AS category FROM books INNER JOIN categories ON books.category_fk = categories.id",
   );
   return rows;
 };
