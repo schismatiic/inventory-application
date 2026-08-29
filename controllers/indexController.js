@@ -77,6 +77,11 @@ const createBook = async (req, res) => {
   );
   res.redirect("/");
 };
+// Remove
+const getRemoveBook = async (req, res) => {
+  const { id } = req.params;
+  res.render("remove-book", { id });
+};
 
 module.exports = {
   getBook,
@@ -84,4 +89,5 @@ module.exports = {
   getCreateBook,
   createBook,
   validateMessage,
+  getRemoveBook,
 };

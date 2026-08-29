@@ -30,10 +30,15 @@ const createBook = async (name, author, description, pages, category_fk) => {
     [name, author, description, pages, category_fk],
   );
 };
+
+const removeBook = async (id) => {
+  await pool.query("DELETE FROM books WHERE id = %1", [id]);
+};
 module.exports = {
   getAllBooks,
   getAllCategories,
   getBook,
   getCategory,
   createBook,
+  removeBook,
 };

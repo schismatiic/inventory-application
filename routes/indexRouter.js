@@ -7,11 +7,13 @@ const {
   getCreateBook,
   createBook,
   validateMessage,
+  getRemoveBook,
 } = require("../controllers/indexController");
 
 indexRouter.get("/", getBooks);
 indexRouter.get("/book/create", getCreateBook);
 indexRouter.post("/book/create", validateMessage, createBook);
 indexRouter.get("/book/:id", getBook);
+indexRouter.get("/book/:id/remove", getRemoveBook);
 
 module.exports = indexRouter;
