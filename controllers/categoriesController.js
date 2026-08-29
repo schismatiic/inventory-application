@@ -72,6 +72,12 @@ const createUpdateCategory = async (req, res) => {
   await db.updateCategory(id, categoryName, categoryDescription);
   res.redirect("/categories");
 };
+// DELETE
+const getRemoveCategory = async (req, res) => {
+  const { id } = req.params;
+  const { name } = await db.getCategory(id);
+  res.render("remove-category", { id, name });
+};
 module.exports = {
   getCategory,
   getCategories,
@@ -80,4 +86,5 @@ module.exports = {
   validateCreateCategory,
   getUpdateCategory,
   createUpdateCategory,
+  getRemoveCategory,
 };

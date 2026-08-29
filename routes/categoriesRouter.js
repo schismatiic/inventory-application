@@ -9,6 +9,7 @@ const {
   validateCreateCategory,
   getUpdateCategory,
   createUpdateCategory,
+  getRemoveCategory,
 } = require("../controllers/categoriesController");
 
 categoriesRouter.get("/", getCategories);
@@ -21,5 +22,6 @@ categoriesRouter.post(
   validateCreateCategory,
   createUpdateCategory,
 );
+categoriesRouter.get("/:id/remove", getRemoveCategory);
 
 module.exports = categoriesRouter;
