@@ -10,6 +10,8 @@ const {
   getUpdateCategory,
   createUpdateCategory,
   getRemoveCategory,
+  removeCategoryPost,
+  validateRemoveCategory,
 } = require("../controllers/categoriesController");
 
 categoriesRouter.get("/", getCategories);
@@ -23,5 +25,10 @@ categoriesRouter.post(
   createUpdateCategory,
 );
 categoriesRouter.get("/:id/remove", getRemoveCategory);
+categoriesRouter.post(
+  "/:id/remove",
+  validateRemoveCategory,
+  removeCategoryPost,
+);
 
 module.exports = categoriesRouter;

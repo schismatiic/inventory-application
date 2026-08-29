@@ -24,7 +24,18 @@ const validateCreateCategory = [
     })
     .withMessage("Password do not match."),
 ];
-
+const validateRemoveCategory = [
+  body("categoryPassword")
+    .trim()
+    .notEmpty()
+    .withMessage("Password are required.")
+    .isLength({ min: 1, max: 25 })
+    .withMessage(`Password ${lengthErr}`)
+    .custom((value, { req }) => {
+      return value === ADMIN_PASSWORD;
+    })
+    .withMessage("Password do not match."),
+];
 // CREATE
 const createCategory = async (req, res) => {
   const errors = validationResult(req);
@@ -78,6 +89,20 @@ const getRemoveCategory = async (req, res) => {
   const { name } = await db.getCategory(id);
   res.render("remove-category", { id, name });
 };
+const removeCategoryPost = async (req, res) => {
+  const { id } = req.params;
+  const { name } = await db.getCategory(id);
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).render("remove-book", {
+      errors: errors.array(),
+      id,
+      name,
+    });
+  }
+  await db.removeCategory(id);
+  res.redirect("/categories");
+};
 module.exports = {
   getCategory,
   getCategories,
@@ -87,4 +112,6 @@ module.exports = {
   getUpdateCategory,
   createUpdateCategory,
   getRemoveCategory,
+  removeCategoryPost,
+  validateRemoveCategory,
 };
