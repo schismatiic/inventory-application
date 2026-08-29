@@ -7,6 +7,12 @@ const createBook = async (name, author, description, pages, category_fk) => {
     [name, author, description, pages, category_fk],
   );
 };
+const createCategory = async (name, description) => {
+  await pool.query(
+    "INSERT INTO categories (name, description) VALUES ($1, $2)",
+    [name, description],
+  );
+};
 // READ
 const getAllBooks = async () => {
   const { rows } = await pool.query(
@@ -57,4 +63,5 @@ module.exports = {
   createBook,
   removeBook,
   updateBook,
+  createCategory,
 };
