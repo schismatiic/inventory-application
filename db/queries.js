@@ -1,5 +1,13 @@
 const pool = require("./pool");
 
+// CREATE
+const createBook = async (name, author, description, pages, category_fk) => {
+  await pool.query(
+    "INSERT INTO books (name, author, description, pages, category_fk) VALUES ($1, $2, $3, $4, $5)",
+    [name, author, description, pages, category_fk],
+  );
+};
+// READ
 const getAllBooks = async () => {
   const { rows } = await pool.query(
     "SELECT books.id, books.name, books.author, books.description, books.pages, categories.name AS category FROM books INNER JOIN categories ON books.category_fk = categories.id",
@@ -23,14 +31,21 @@ const getCategory = async (id) => {
   ]);
   return rows[0];
 };
-
-const createBook = async (name, author, description, pages, category_fk) => {
+//UPDATE
+const updateBook = async (
+  id,
+  name,
+  author,
+  description,
+  pages,
+  category_fk,
+) => {
   await pool.query(
-    "INSERT INTO books (name, author, description, pages, category_fk) VALUES ($1, $2, $3, $4, $5)",
-    [name, author, description, pages, category_fk],
+    "UPDATE books SET name = $2, author = $3, description = $4, pages = $5, category_fk = $6 WHERE id = $1",
+    [id, name, author, description, pages, category_fk],
   );
 };
-
+// DELETE
 const removeBook = async (id) => {
   await pool.query("DELETE FROM books WHERE id = $1", [id]);
 };
@@ -41,4 +56,5 @@ module.exports = {
   getCategory,
   createBook,
   removeBook,
+  updateBook,
 };

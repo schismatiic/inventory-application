@@ -10,6 +10,7 @@ const {
   getRemoveBook,
   removeBookPost,
   validateRemoveBook,
+  getUpdateBook,
 } = require("../controllers/indexController");
 
 indexRouter.get("/", getBooks);
@@ -18,5 +19,6 @@ indexRouter.post("/book/create", validateCreateBook, createBookPost);
 indexRouter.get("/book/:id", getBook);
 indexRouter.get("/book/:id/remove", getRemoveBook);
 indexRouter.post("/book/:id/remove", validateRemoveBook, removeBookPost);
+indexRouter.get("/book/:id/edit", getUpdateBook);
 
 module.exports = indexRouter;

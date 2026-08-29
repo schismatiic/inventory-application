@@ -53,21 +53,7 @@ const validateRemoveBook = [
     })
     .withMessage("Password do not match."),
 ];
-// Get
-const getBook = async (req, res) => {
-  const { id } = req.params;
-  const { name, author, description, pages, category } = await db.getBook(id);
-  res.render("book", { id, name, author, description, pages, category });
-};
-const getBooks = async (req, res) => {
-  const books = await db.getAllBooks();
-  res.render("index", { books });
-};
-const getCreateBook = async (req, res) => {
-  const categories = await db.getAllCategories();
-  res.render("create-book", { categories });
-};
-// Create
+// CREATE
 const createBookPost = async (req, res) => {
   const errors = validationResult(req);
   const categories = await db.getAllCategories();
@@ -88,7 +74,37 @@ const createBookPost = async (req, res) => {
   );
   res.redirect("/");
 };
-// Remove
+// READ
+const getBook = async (req, res) => {
+  const { id } = req.params;
+  const { name, author, description, pages, category } = await db.getBook(id);
+  res.render("book", { id, name, author, description, pages, category });
+};
+const getBooks = async (req, res) => {
+  const books = await db.getAllBooks();
+  res.render("index", { books });
+};
+const getCreateBook = async (req, res) => {
+  const categories = await db.getAllCategories();
+  res.render("create-book", { categories });
+};
+const getUpdateBook = async (req, res) => {
+  const { id } = req.params;
+  const categories = await db.getAllCategories();
+  const { name, author, description, pages, category } = await db.getBook(id);
+  res.render("update-book", {
+    id,
+    categories,
+    name,
+    author,
+    description,
+    pages,
+    category,
+  });
+};
+// UPDATE
+
+// DELETE
 const getRemoveBook = async (req, res) => {
   const { id } = req.params;
   const { name } = await db.getBook(id);
@@ -117,4 +133,5 @@ module.exports = {
   getRemoveBook,
   removeBookPost,
   validateRemoveBook,
+  getUpdateBook,
 };
