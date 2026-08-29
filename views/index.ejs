@@ -9,29 +9,25 @@
 </head>
 
 <body class="flex flex-col min-h-screen bg-black text-white font-extralight">
-    <div>
-        <header class="mx-4 my-4">
-            <h1 class="text-4xl font-semibold">Book inventory</h1>
-        </header>
+    <%- include('header', {name: "Book inventory" }) %>
         <div class="mx-4">
             <a href="/create-book"
                 class="bg-white text-black px-4 py-2 cursor-pointer hover:bg-white/95 active:scale-95">+
                 New
                 book</a>
         </div>
-    </div>
 
-    <main class="flex-1 mt-2">
-        <ul class="flex flex-col border border-white/20 p-4 m-4 gap-2">
-            <% books.forEach(book=> { %>
-                <li>
-                    <%- include('book-card', {id: book.id, name: book.name, author: book.author, description:
-                        book.description, pages: book.pages, category: book.category}) %>
-                </li>
-                <% }); %>
-        </ul>
-    </main>
-    <%- include('footer') %>
+        <main class="flex-1 mt-2">
+            <ul class="flex flex-col border border-white/20 p-4 m-4 gap-2">
+                <% books.forEach(book=> { %>
+                    <li>
+                        <%- include('book-card', {id: book.id, name: book.name, author: book.author, description:
+                            book.description, pages: book.pages, category: book.category}) %>
+                    </li>
+                    <% }); %>
+            </ul>
+        </main>
+        <%- include('footer') %>
 </body>
 
 </html>

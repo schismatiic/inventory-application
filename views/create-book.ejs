@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create book</title>
+    <link rel="stylesheet" href="/output.css">
+</head>
+
+<body class="flex flex-col min-h-screen bg-black text-white font-extralight">
+    <%- include('header', {name: "Create book" } ) %>
+        <main class="flex flex-1 mt-2 justify-center">
+            <form class="flex flex-col w-full md:max-w-1/2 m-4 border border-white/20 p-4 gap-2"
+                action="/create-book/create" method="POST">
+                <label for="book-name">
+                    Name
+                </label>
+                <input name="book-name" id="book-name" class="border border-white/20  px-4 py-2" type="text"
+                    placeholder="Notes from Underground" required>
+                <label for="book-author">
+                    Author
+                </label>
+                <input name="book-author" id="book-author" class="border border-white/20  px-4 py-2" type="text"
+                    placeholder="Fyodor Dostoevsky" required>
+                <label for="book-description">
+                    Description
+                </label>
+                <textarea name="book-description" id="book-description" class="border border-white/20  px-4 py-2"
+                    placeholder="A bitter and isolated man reflects on society, freedom, and his own existence."
+                    required></textarea>
+                <label for="book-pages">
+                    Pages
+                </label>
+                <input name="book-pages" id="book-pages" class="border border-white/20  px-4 py-2" type="number"
+                    placeholder="136" required>
+                <label for="book-category">
+                    Category
+                </label>
+                <select name="book-category" id="book-category" class="border border-white/20  px-4 py-2" required>
+                    <% categories.forEach(category=> { %>
+                        <option value="<%= category.id %>">
+                            <%= category.name %>
+                        </option>
+                        <% }); %>
+                </select>
+                <button
+                    class="bg-white text-black px-4 py-2 cursor-pointer hover:bg-white/95 active:scale-95 mt-4 w-fit"
+                    type="submit">Create</button>
+            </form>
+        </main>
+
+
+        <%- include('footer') %>
+
+</body>
+
+</html>
