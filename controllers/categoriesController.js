@@ -1,6 +1,30 @@
 const db = require("../db/queries");
 const { body, validationResult, matchedData } = require("express-validator");
 
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+const lengthErr = "must be between 1 and 25 characters.";
+const lengthErr2 = "must be between 1 and 100 characters.";
+const validateCreateCategory = [
+  body("categoryName")
+    .trim()
+    .isLength({ min: 1, max: 25 })
+    .withMessage(`Name ${lengthErr}`),
+  body("categoryDescription")
+    .trim()
+    .isLength({ min: 1, max: 100 })
+    .withMessage(`Description ${lengthErr2}`),
+  body("categoryPassword")
+    .trim()
+    .notEmpty()
+    .withMessage("Password are required.")
+    .isLength({ min: 1, max: 25 })
+    .withMessage(`Password ${lengthErr}`)
+    .custom((value, { req }) => {
+      return value === ADMIN_PASSWORD;
+    })
+    .withMessage("Password do not match."),
+];
+
 // CREATE
 const createCategory = async (req, res) => {
   const errors = validationResult(req);
@@ -32,4 +56,5 @@ module.exports = {
   getCategories,
   createCategory,
   getCreateCategory,
+  validateCreateCategory,
 };

@@ -5,10 +5,13 @@ const {
   getCategory,
   getCategories,
   getCreateCategory,
+  createCategory,
+  validateCreateCategory,
 } = require("../controllers/categoriesController");
 
 categoriesRouter.get("/", getCategories);
-categoriesRouter.get("/:create", getCreateCategory);
+categoriesRouter.get("/create", getCreateCategory);
+categoriesRouter.post("/create", validateCreateCategory, createCategory);
 categoriesRouter.get("/:id", getCategory);
 
 module.exports = categoriesRouter;
