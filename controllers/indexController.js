@@ -103,7 +103,35 @@ const getUpdateBook = async (req, res) => {
   });
 };
 // UPDATE
-
+const postUpdateBook = async (req, res) => {
+  const { id } = req.params;
+  const { name, author, description, pages, category } = await db.getBook(id);
+  const errors = validationResult(req);
+  const categories = await db.getAllCategories();
+  if (!errors.isEmpty()) {
+    return res.status(400).render("update-book", {
+      errors: errors.array(),
+      id,
+      categories,
+      name,
+      author,
+      description,
+      pages,
+      category,
+    });
+  }
+  const { bookName, bookAuthor, bookDescription, bookPages, bookCategory } =
+    matchedData(req);
+  await db.updateBook(
+    id,
+    bookName,
+    bookAuthor,
+    bookDescription,
+    bookPages,
+    bookCategory,
+  );
+  res.redirect("/");
+};
 // DELETE
 const getRemoveBook = async (req, res) => {
   const { id } = req.params;
@@ -134,4 +162,5 @@ module.exports = {
   removeBookPost,
   validateRemoveBook,
   getUpdateBook,
+  postUpdateBook,
 };

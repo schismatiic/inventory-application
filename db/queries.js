@@ -31,7 +31,7 @@ const getCategory = async (id) => {
   ]);
   return rows[0];
 };
-//UPDATE
+// UPDATE
 const updateBook = async (
   id,
   name,
