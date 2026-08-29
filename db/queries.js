@@ -51,6 +51,12 @@ const updateBook = async (
     [id, name, author, description, pages, category_fk],
   );
 };
+const updateCategory = async (id, name, description) => {
+  await pool.query(
+    "UPDATE categories SET name = $2, description = $3 WHERE id = $1",
+    [id, name, description],
+  );
+};
 // DELETE
 const removeBook = async (id) => {
   await pool.query("DELETE FROM books WHERE id = $1", [id]);
@@ -64,4 +70,5 @@ module.exports = {
   removeBook,
   updateBook,
   createCategory,
+  updateCategory,
 };

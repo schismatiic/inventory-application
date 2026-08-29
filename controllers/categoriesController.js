@@ -50,6 +50,12 @@ const getCategories = async (req, res) => {
 const getCreateCategory = async (req, res) => {
   res.render("create-category");
 };
+const getUpdateCategory = async (req, res) => {
+  const { id } = req.params;
+  const { name, description } = await db.getCategory(id);
+  res.render("update-category", { id, name, description });
+};
+// UPDATE
 
 module.exports = {
   getCategory,
@@ -57,4 +63,5 @@ module.exports = {
   createCategory,
   getCreateCategory,
   validateCreateCategory,
+  getUpdateCategory,
 };
