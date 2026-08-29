@@ -4,3 +4,5 @@ const getBooks = async (req, res) => {
   const books = await db.getAllBooks();
   res.render("index", { books });
 };
+
+module.exports = { getBooks };
