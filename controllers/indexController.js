@@ -3,6 +3,7 @@ const { body, validationResult, matchedData } = require("express-validator");
 
 const lengthErr = "must be between 1 and 25 characters.";
 const lengthErr2 = "must be between 1 and 100 characters.";
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
 const validateMessage = [
   body("bookName")
@@ -29,6 +30,16 @@ const validateMessage = [
     .withMessage("Category are required.")
     .isInt({ min: 1 })
     .withMessage("Category must be a positive integer."),
+  body("bookPassword")
+    .trim()
+    .notEmpty()
+    .withMessage("Password are required.")
+    .isLength({ min: 1, max: 25 })
+    .withMessage(`Password ${lengthErr}`)
+    .custom((value, { req }) => {
+      return value === ADMIN_PASSWORD;
+    })
+    .withMessage("Password do not match."),
 ];
 // Get
 const getBook = async (req, res) => {
