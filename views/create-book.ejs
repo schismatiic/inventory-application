@@ -10,34 +10,34 @@
 
 <body class="flex flex-col min-h-screen bg-black text-white font-extralight">
     <%- include('header', {name: "Create book" } ) %>
-        <main class="flex flex-1 mt-2 justify-center">
-            <form class="flex flex-col w-full md:max-w-1/2 m-4 border border-white/20 p-4 gap-2"
-                action="/create-book/create" method="POST">
-                <label for="book-name">
+        <main class="flex flex-col flex-1 mt-2 items-center">
+            <form class="flex flex-col w-full max-w-11/12 md:max-w-1/2 m-4 border border-white/20 p-4 gap-2"
+                action="/create-book" method="POST">
+                <label for="bookName">
                     Name
                 </label>
-                <input name="book-name" id="book-name" class="border border-white/20  px-4 py-2" type="text"
+                <input name="bookName" id="bookName" class="border border-white/20  px-4 py-2" type="text"
                     placeholder="Notes from Underground" required>
-                <label for="book-author">
+                <label for="bookAuthor">
                     Author
                 </label>
-                <input name="book-author" id="book-author" class="border border-white/20  px-4 py-2" type="text"
+                <input name="bookAuthor" id="bookAuthor" class="border border-white/20  px-4 py-2" type="text"
                     placeholder="Fyodor Dostoevsky" required>
-                <label for="book-description">
+                <label for="bookDescription">
                     Description
                 </label>
-                <textarea name="book-description" id="book-description" class="border border-white/20  px-4 py-2"
+                <textarea name="bookDescription" id="bookDescription" class="border border-white/20  px-4 py-2"
                     placeholder="A bitter and isolated man reflects on society, freedom, and his own existence."
                     required></textarea>
-                <label for="book-pages">
+                <label for="bookPages">
                     Pages
                 </label>
-                <input name="book-pages" id="book-pages" class="border border-white/20  px-4 py-2" type="number"
+                <input name="bookPages" id="bookPages" class="border border-white/20  px-4 py-2" type="number"
                     placeholder="136" required>
-                <label for="book-category">
+                <label for="bookCategory">
                     Category
                 </label>
-                <select name="book-category" id="book-category" class="border border-white/20  px-4 py-2" required>
+                <select name="bookCategory" id="bookCategory" class="border border-white/20  px-4 py-2" required>
                     <% categories.forEach(category=> { %>
                         <option value="<%= category.id %>">
                             <%= category.name %>
@@ -48,6 +48,15 @@
                     class="bg-white text-black px-4 py-2 cursor-pointer hover:bg-white/95 active:scale-95 mt-4 w-fit"
                     type="submit">Create</button>
             </form>
+            <% if (locals.errors) {%>
+                <ul class="m-4 border border-white/20 p-4 w-fit">
+                    <% errors.forEach(function(error) { %>
+                        <li class="font-bold">
+                            <%= error.msg %>
+                        </li>
+                        <% }); %>
+                </ul>
+                <% } %>
         </main>
 
 

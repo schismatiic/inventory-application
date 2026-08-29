@@ -216,6 +216,9 @@
   .w-full {
     width: 100%;
   }
+  .max-w-11\/12 {
+    max-width: calc(11 / 12 * 100%);
+  }
   .flex-1 {
     flex: 1;
   }
@@ -234,8 +237,14 @@
   .justify-center {
     justify-content: center;
   }
+  .justify-start {
+    justify-content: flex-start;
+  }
   .gap-2 {
     gap: calc(var(--spacing) * 2);
+  }
+  .self-start {
+    align-self: flex-start;
   }
   .border {
     border-style: var(--tw-border-style);
@@ -274,6 +283,9 @@
   }
   .text-center {
     text-align: center;
+  }
+  .text-left {
+    text-align: left;
   }
   .text-4xl {
     font-size: var(--text-4xl);
