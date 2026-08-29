@@ -29,7 +29,7 @@ const validateCreateCategory = [
 const createCategory = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).render("create-book", {
+    return res.status(400).render("create-category", {
       errors: errors.array(),
     });
   }
@@ -56,7 +56,22 @@ const getUpdateCategory = async (req, res) => {
   res.render("update-category", { id, name, description });
 };
 // UPDATE
-
+const createUpdateCategory = async (req, res) => {
+  const { id } = req.params;
+  const { name, description } = await db.getCategory(id);
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).render("update-category", {
+      errors: errors.array(),
+      id,
+      name,
+      description,
+    });
+  }
+  const { categoryName, categoryDescription } = matchedData(req);
+  await db.updateCategory(id, categoryName, categoryDescription);
+  res.redirect("/categories");
+};
 module.exports = {
   getCategory,
   getCategories,
@@ -64,4 +79,5 @@ module.exports = {
   getCreateCategory,
   validateCreateCategory,
   getUpdateCategory,
+  createUpdateCategory,
 };

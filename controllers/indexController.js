@@ -103,7 +103,7 @@ const getUpdateBook = async (req, res) => {
   });
 };
 // UPDATE
-const postUpdateBook = async (req, res) => {
+const createUpdateBook = async (req, res) => {
   const { id } = req.params;
   const { name, author, description, pages, category } = await db.getBook(id);
   const errors = validationResult(req);
@@ -162,5 +162,5 @@ module.exports = {
   removeBookPost,
   validateRemoveBook,
   getUpdateBook,
-  postUpdateBook,
+  createUpdateBook,
 };

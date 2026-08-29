@@ -8,6 +8,7 @@ const {
   createCategory,
   validateCreateCategory,
   getUpdateCategory,
+  createUpdateCategory,
 } = require("../controllers/categoriesController");
 
 categoriesRouter.get("/", getCategories);
@@ -15,5 +16,10 @@ categoriesRouter.get("/create", getCreateCategory);
 categoriesRouter.post("/create", validateCreateCategory, createCategory);
 categoriesRouter.get("/:id", getCategory);
 categoriesRouter.get("/:id/edit", getUpdateCategory);
+categoriesRouter.post(
+  "/:id/edit",
+  validateCreateCategory,
+  createUpdateCategory,
+);
 
 module.exports = categoriesRouter;
