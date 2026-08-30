@@ -2,7 +2,7 @@ const db = require("../db/queries");
 const { body, validationResult, matchedData } = require("express-validator");
 
 const lengthErr = "must be between 1 and 25 characters.";
-const lengthErr2 = "must be between 1 and 100 characters.";
+const lengthErr2 = "must be between 1 and 500 characters.";
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
 const validateCreateBook = [
@@ -16,7 +16,7 @@ const validateCreateBook = [
     .withMessage(`Author ${lengthErr}`),
   body("bookDescription")
     .trim()
-    .isLength({ min: 1, max: 100 })
+    .isLength({ min: 1, max: 500 })
     .withMessage(`Description ${lengthErr2}`),
   body("bookPages")
     .trim()
