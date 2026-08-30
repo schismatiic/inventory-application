@@ -37,6 +37,13 @@ const getCategory = async (id) => {
   ]);
   return rows[0];
 };
+const getBooksFromCategory = async (id) => {
+  const { rows } = await pool.query(
+    "SELECT * FROM books WHERE category_fk = $1",
+    [id],
+  );
+  return rows;
+};
 // UPDATE
 const updateBook = async (
   id,
@@ -76,4 +83,5 @@ module.exports = {
   createCategory,
   updateCategory,
   removeCategory,
+  getBooksFromCategory,
 };

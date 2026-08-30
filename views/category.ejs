@@ -21,6 +21,13 @@
                     <span class="font-bold">Description:</span>
                     <%= description %>
                 </p>
+                <ul class="border border-white/20">
+                    <% books.forEach(book=> { %>
+                        <li class="not-last:border-b p-2 not-last:border-white/20">
+                            <%= book.name %>
+                        </li>
+                        <% }); %>
+                </ul>
                 <div class="mt-4">
                     <a href="/categories/<%= id %>/edit"
                         class="bg-white text-black px-4 py-1 cursor-pointer hover:bg-white/95 active:scale-95">Edit</a>

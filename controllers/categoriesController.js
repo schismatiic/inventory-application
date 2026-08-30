@@ -52,7 +52,8 @@ const createCategory = async (req, res) => {
 const getCategory = async (req, res) => {
   const { id } = req.params;
   const { name, description } = await db.getCategory(id);
-  res.render("category", { id, name, description });
+  const books = await db.getBooksFromCategory(id);
+  res.render("category", { id, name, description, books });
 };
 const getCategories = async (req, res) => {
   const categories = await db.getAllCategories();
